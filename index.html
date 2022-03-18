@@ -24,15 +24,27 @@
                 border: 1px solid #ddd;
                 text-align: center;
             }
+
+            #top-container {
+                display: flex;
+                justify-content: center;
+                padding: 50px;
+            }
         </style>
     </head>
 
     <body>
+        <div id="top-container">
+            <button id="clear-btn">START</button>
+        </div>
         <div id="container">
         </div>
 
         <script>
-            const div_container = document.querySelector('#container');
+            const clear = document.querySelector('#clear-btn');
+
+
+            const container = document.querySelector('#container');
 
             function makeRows(rows, cols) {
                 container.style.setProperty('--grid-rows', rows);
@@ -40,10 +52,17 @@
                 for (c = 0; c < (rows * cols); c++) {
                     let cell = document.createElement("div");
                     cell.innerText = (c + 1);
+                    cell.addEventListener('mouseover', function (e) {
+                        e.target.style.backgroundColor = "blue";
+                    });
                     container.appendChild(cell).className = "grid-item";
                 };
             };
-            makeRows(16, 16);
+
+            clear.addEventListener('click', function (e) {
+                clear.textContent = 'CLEAR';
+                makeRows(16, 16);
+            });
         </script>
     </body>
 
